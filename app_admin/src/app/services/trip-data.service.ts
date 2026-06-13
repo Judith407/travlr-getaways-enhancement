@@ -17,9 +17,11 @@ export class TripDataService {
     @Inject(BROWSER_STORAGE) private storage: Storage
   ) { }
 
+  //shows the backend API route
   url = 'http://localhost:3000/api/trips';
   baseUrl = 'http://localhost:3000/api';
 
+  // Shows the CRUD/API Communication methods
   getTrips(): Observable<Trip[]> {
     return this.http.get<Trip[]>(this.url);
   }
@@ -35,6 +37,9 @@ export class TripDataService {
   updateTrip(formData: Trip): Observable<Trip> {
     return this.http.put<Trip>(this.url + '/' + formData.code, formData);
   }
+  deleteTrip(tripCode: string): Observable<any> {
+    return this.http.delete<any>(this.url + '/' + tripCode);
+}
 
   login(user: User, passwd: string): Observable<AuthResponse> {
     return this.handleAuthAPICall('login', user, passwd);

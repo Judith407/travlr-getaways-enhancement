@@ -1,9 +1,18 @@
 <div>
   <button *ngIf="isLoggedIn()" (click)="addTrip()" class="btn btn-info">Add Trip</button>
 </div>
+<!--search bar-->
+<div class="my-3">
+  <input
+  type="text"
+  class="form-control"
+  placeholder="Search Trips"
+  [(ngModel)]="searchText"
+  />
+</div>
 
 <div class="row g-3">
-  <div *ngFor="let trip of trips" class="col-md-4">
+  <div *ngFor="let trip of filteredTrips" class="col-md-4">
     <app-trip-card [trip]="trip"></app-trip-card>
   </div>
 </div>

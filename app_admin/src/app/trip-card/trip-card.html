@@ -24,5 +24,12 @@
       Edit Trip
     </button>
 
+    <button
+      *ngIf="isLoggedIn()"
+      (click)="deleteTrip(trip)"
+      class="btn btn-danger ms-2">
+      Delete Trip
+    </button>
+
   </div>
 </div>

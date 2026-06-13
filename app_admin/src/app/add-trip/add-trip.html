@@ -1,6 +1,9 @@
 
 <div class="col-md-4"> 
     <h2 class="text-center">Add Trip</h2> 
+    <div *ngIf="message" class="alert alert-info">
+      {{ message }}
+    </div>
     <form *ngIf="addForm" [formGroup]="addForm" 
 (ngSubmit)="onSubmit()"> 
  

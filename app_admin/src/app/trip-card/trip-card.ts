@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Trip } from '../models/trip';
 import { Authentication } from '../services/authentication.service';
+import { TripDataService } from '../services/trip-data.service';
 
 @Component({
   selector: 'app-trip-card',
@@ -17,7 +18,8 @@ export class TripCardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: Authentication
+    private authenticationService: Authentication,
+    private tripService: TripDataService
   ) {}
 
   ngOnInit(): void {
@@ -32,4 +34,23 @@ export class TripCardComponent implements OnInit {
     localStorage.setItem('tripCode', trip.code);
     this.router.navigate(['edit-trip']);
   }
+  public deleteTrip(trip: Trip) {
+  const confirmed = confirm('Are you sure you want to delete this trip?');
+
+  if (!confirmed) {
+    return;
+  }
+
+  this.tripService.deleteTrip(trip.code)
+    .subscribe({
+      next: (data: any) => {
+        console.log(data);
+        window.location.reload();
+      },
+      error: (error: any) => {
+        console.log('Error deleting trip: ' + error);
+        alert('Trip could not be deleted. Please try again.');
+      }
+    });
+}
 }
